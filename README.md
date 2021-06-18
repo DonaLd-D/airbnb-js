@@ -563,3 +563,490 @@ if (currentUser) {
   };
 }
 ```
+
+- 不要命名参数为arguments。
+
+```
+// bad
+function foo(name, options, arguments) {
+  // ...
+}
+
+// good
+function foo(name, options, args) {
+  // ...
+}
+```
+- 选择缺省参数的方式，避免修改参数
+
+```
+// really bad
+function handleThings(opts) {
+  // No! We shouldn’t mutate function arguments.
+  // Double bad: if opts is falsy it'll be set to an object which may
+  // be what you want but it can introduce subtle bugs.
+  opts = opts || {};
+  // ...
+}
+
+// still bad
+function handleThings(opts) {
+  if (opts === void 0) {
+    opts = {};
+  }
+  // ...
+}
+
+// good
+function handleThings(opts = {}) {
+  // ...
+}
+```
+- 避免缺省参数带来的副作用
+
+```
+var b = 1;
+// bad
+function count(a = b++) {
+  console.log(a);
+}
+count();  // 1
+count();  // 2
+count(3); // 3
+count();  // 3
+```
+- 将缺省参数放置最后
+
+```
+// bad
+function handleThings(opts = {}, name) {
+  // ...
+}
+
+// good
+function handleThings(name, opts = {}) {
+  // ...
+}
+```
+- 不要使用Function构造函数创建函数 
+```
+// bad
+var add = new Function('a', 'b', 'return a + b');
+
+// still bad
+var subtract = Function('a', 'b', 'return a - b');
+```
+- 函数签名留空格 space-before-function-paren space-before-blocks
+
+```
+// bad
+const f = function(){};
+const g = function (){};
+const h = function() {};
+
+// good
+const x = function () {};
+const y = function a() {};
+```
+
+- 不要修改参数
+
+> why?修改作为参数传入的对象，容易引发不预料的副作用
+
+```
+// bad
+function f1(obj) {
+  obj.key = 1;
+}
+
+// good
+function f2(obj) {
+  const key = Object.prototype.hasOwnProperty.call(obj, 'key') ? obj.key : 1;
+}
+```
+
+- 不要对参数重新赋值
+
+> why?对参数重新赋值会引发不可预料的行为，特别是访问arguments对象时。同时，会引发V8优化问题
+
+```
+// bad
+function f1(a) {
+  a = 1;
+  // ...
+}
+
+function f2(a) {
+  if (!a) { a = 1; }
+  // ...
+}
+
+// good
+function f3(a) {
+  const b = a || 1;
+  // ...
+}
+
+function f4(a = 1) {
+  // ...
+}
+```
+- 使用...操作符调用变长函数 
+
+> why?更简洁
+
+```
+// bad
+const x = [1, 2, 3, 4, 5];
+console.log.apply(console, x);
+
+// good
+const x = [1, 2, 3, 4, 5];
+console.log(...x);
+
+// bad
+new (Function.prototype.bind.apply(Date, [null, 2016, 8, 5]));
+
+// good
+new Date(...[2016, 8, 5]);
+```
+
+- 函数签名或者函数调用占多行时，每一个参数占一行，并且最后一个参数带逗号结束
+
+```
+
+// bad
+function foo(bar,
+             baz,
+             quux) {
+  // ...
+}
+
+// good
+function foo(
+  bar,
+  baz,
+  quux,
+) {
+  // ...
+}
+
+// bad
+console.log(foo,
+  bar,
+  baz);
+
+// good
+console.log(
+  foo,
+  bar,
+  baz,
+);
+```
+
+### 箭头函数Arrow Functions
+
+- 如果必须使用匿名函数，或者inline 回调函数，使用箭头函数。
+
+> why?语法更简洁，并且this更符合预期  
+如果函数逻辑相当复杂，应当使用命名函数
+
+```
+// bad
+[1, 2, 3].map(function (x) {
+  const y = x + 1;
+  return x * y;
+});
+
+// good
+[1, 2, 3].map((x) => {
+  const y = x + 1;
+  return x * y;
+});
+```
+
+- 如果函数体只有一条语句，且该语句不会产生副作用。使用简写方式，隐式返回；或者使用完整写法，显式return。
+
+```
+// bad
+[1, 2, 3].map(number => {
+  const nextNumber = number + 1;
+  `A string containing the ${nextNumber}.`;
+});
+
+// good
+[1, 2, 3].map(number => `A string containing the ${number}.`);
+
+// good
+[1, 2, 3].map((number) => {
+  const nextNumber = number + 1;
+  return `A string containing the ${nextNumber}.`;
+});
+
+// good
+[1, 2, 3].map((number, index) => ({
+  [index]: number,
+}));
+
+// No implicit return with side effects
+function foo(callback) {
+  const val = callback();
+  if (val === true) {
+    // Do something if callback returns true
+  }
+}
+
+let bool = false;
+
+// bad
+foo(() => bool = true);
+
+// good
+foo(() => {
+  bool = true;
+});
+```
+
+- 当表达式占多行时，使用括号括起来增强可读性
+
+> why?函数开头和结束更明确
+
+```
+// bad
+['get', 'post', 'put'].map(httpMethod => Object.prototype.hasOwnProperty.call(
+    httpMagicObjectWithAVeryLongName,
+    httpMethod,
+  )
+);
+
+// good
+['get', 'post', 'put'].map(httpMethod => (
+  Object.prototype.hasOwnProperty.call(
+    httpMagicObjectWithAVeryLongName,
+    httpMethod,
+  )
+));
+```
+
+- 如果函数只有一个参数，省略括号，省略花括号。否则，一直使用完整写法，保持一致性。
+
+```
+// bad
+[1, 2, 3].map((x) => x * x);
+
+// good
+[1, 2, 3].map(x => x * x);
+
+// good
+[1, 2, 3].map(number => (
+  `A long string with the ${number}. It’s so long that we don’t want it to take up space on the .map line!`
+));
+
+// bad
+[1, 2, 3].map(x => {
+  const y = x + 1;
+  return x * y;
+});
+
+// good
+[1, 2, 3].map((x) => {
+  const y = x + 1;
+  return x * y;
+});
+```
+
+- 使用无歧义的=>语法，与<=,>=区分开。
+
+```
+// bad
+const itemHeight = item => item.height > 256 ? item.largeSize : item.smallSize;
+
+// bad
+const itemHeight = (item) => item.height > 256 ? item.largeSize : item.smallSize;
+
+// good
+const itemHeight = item => (item.height > 256 ? item.largeSize : item.smallSize);
+
+// good
+const itemHeight = (item) => {
+  const { height, largeSize, smallSize } = item;
+  return height > 256 ? largeSize : smallSize;
+
+```
+
+#### 类和构造函数 Classes & Constructors
+
+- 使用class，避免直接操作prototype
+
+> why?class 语法更简洁，更易懂
+
+```
+// bad
+function Queue(contents = []) {
+  this.queue = [...contents];
+}
+Queue.prototype.pop = function () {
+  const value = this.queue[0];
+  this.queue.splice(0, 1);
+  return value;
+};
+
+// good
+class Queue {
+  constructor(contents = []) {
+    this.queue = [...contents];
+  }
+  pop() {
+    const value = this.queue[0];
+    this.queue.splice(0, 1);
+    return value;
+  }
+}
+```
+- 使用extends 继承
+
+> why?这是内置支持的继承原型方法，同时不影响instanceof结果
+
+```
+// bad
+const inherits = require('inherits');
+function PeekableQueue(contents) {
+  Queue.apply(this, contents);
+}
+inherits(PeekableQueue, Queue);
+PeekableQueue.prototype.peek = function () {
+  return this.queue[0];
+};
+
+// good
+class PeekableQueue extends Queue {
+  peek() {
+    return this.queue[0];
+  }
+}
+```
+
+- 通过return this帮助链式方法调用
+
+```
+// bad
+Jedi.prototype.jump = function () {
+  this.jumping = true;
+  return true;
+};
+
+Jedi.prototype.setHeight = function (height) {
+  this.height = height;
+};
+
+const luke = new Jedi();
+luke.jump(); // => true
+luke.setHeight(20); // => undefined
+
+// good
+class Jedi {
+  jump() {
+    this.jumping = true;
+    return this;
+  }
+
+  setHeight(height) {
+    this.height = height;
+    return this;
+  }
+}
+
+const luke = new Jedi();
+
+luke.jump()
+  .setHeight(20);
+
+```
+
+- 自定义toString方法
+
+```
+class Jedi {
+  constructor(options = {}) {
+    this.name = options.name || 'no name';
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  toString() {
+    return `Jedi - ${this.getName()}`;
+  }
+}
+```
+
+- class有缺省构造函数，因此没必要定义空的构造函数。
+
+```
+// bad
+class Jedi {
+  constructor() {}
+
+  getName() {
+    return this.name;
+  }
+}
+
+// bad
+class Rey extends Jedi {
+  constructor(...args) {
+    super(...args);
+  }
+}
+
+// good
+class Rey extends Jedi {
+  constructor(...args) {
+    super(...args);
+    this.name = 'Rey';
+  }
+}
+```
+
+- 避免重复的类成员定义
+
+> why?后者会静默覆盖前者
+
+```
+// bad
+class Foo {
+  bar() { return 1; }
+  bar() { return 2; }
+}
+
+// good
+class Foo {
+  bar() { return 1; }
+}
+
+// good
+class Foo {
+  bar() { return 2; }
+}
+```
+
+### 模块Modules
+- 使用modules（import/export)
+
+> why?modules是未来的趋势
+
+```
+// bad
+const AirbnbStyleGuide = require('./AirbnbStyleGuide');
+module.exports = AirbnbStyleGuide.es6;
+
+// ok
+import AirbnbStyleGuide from './AirbnbStyleGuide';
+export default AirbnbStyleGuide.es6;
+
+// best
+import { es6 } from './AirbnbStyleGuide';
+export default es6;
+```
+
