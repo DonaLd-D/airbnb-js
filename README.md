@@ -1050,3 +1050,465 @@ import { es6 } from './AirbnbStyleGuide';
 export default es6;
 ```
 
+- 不要使用*import
+
+```
+// bad
+import * as AirbnbStyleGuide from './AirbnbStyleGuide';
+
+// good
+import AirbnbStyleGuide from './AirbnbStyleGuide';
+```
+- 不要从import直接export
+
+> why?尽管单行的方式更简洁，但是一行import一行export代码一致性更好
+
+```
+// bad
+// filename es6.js
+export { es6 as default } from './AirbnbStyleGuide';
+
+// good
+// filename es6.js
+import { es6 } from './AirbnbStyleGuide';
+export default es6;
+```
+- 只从一个地方import 
+
+> why?维护性更好
+
+```
+// bad
+import foo from 'foo';
+// … some other imports … //
+import { named1, named2 } from 'foo';
+
+// good
+import foo, { named1, named2 } from 'foo';
+
+// good
+import foo, {
+  named1,
+  named2,
+} from 'foo';
+```
+
+- 不要export变值
+
+```
+// bad
+let foo = 3;
+export { foo };
+
+// good
+const foo = 3;
+export { foo };
+```
+
+- 模块只有单个export时，倾向使用export default 
+
+> why?可读性和可维护性更强
+
+```
+// bad
+export function foo() {}
+
+// good
+export default function foo() {}
+```
+
+- 把import语句置顶
+
+> why?因为import行为会提升，因此保持它们放在最上面，防止产生令人奇怪的行为
+
+```
+// bad
+import foo from 'foo';
+foo.init();
+
+import bar from 'bar';
+
+// good
+import foo from 'foo';
+import bar from 'bar';
+
+foo.init();
+```
+
+- 多行import，像多行数组和多行对象字面量一样写
+
+> why?缩进一致，尾行逗号结束
+
+```
+// bad
+import {longNameA, longNameB, longNameC, longNameD, longNameE} from 'path';
+
+// good
+import {
+  longNameA,
+  longNameB,
+  longNameC,
+  longNameD,
+  longNameE,
+} from 'path';
+```
+
+- 在import语句时不要使用webpack loader语法。
+
+```
+// bad
+import fooSass from 'css!sass!foo.scss';
+import barCss from 'style!css!bar.css';
+
+// good
+import fooSass from 'foo.scss';
+import barCss from 'bar.css';
+```
+
+### 迭代器与生成器 Iterators and Generators
+
+- 不要使用迭代器。更倾向于使用JavaScript的高阶函数代替循环（如for-in 或者for-of)
+
+> why?有利于函数式编程
+使用map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 迭代数组, Object.keys() / Object.values() / Object.entries() 生成数组，这样做到可以迭代任何对象
+
+```
+const numbers = [1, 2, 3, 4, 5];
+
+// bad
+let sum = 0;
+for (let num of numbers) {
+  sum += num;
+}
+sum === 15;
+
+// good
+let sum = 0;
+numbers.forEach((num) => {
+  sum += num;
+});
+sum === 15;
+
+// best (use the functional force)
+const sum = numbers.reduce((total, num) => total + num, 0);
+sum === 15;
+
+// bad
+const increasedByOne = [];
+for (let i = 0; i < numbers.length; i++) {
+  increasedByOne.push(numbers[i] + 1);
+}
+
+// good
+const increasedByOne = [];
+numbers.forEach((num) => {
+  increasedByOne.push(num + 1);
+});
+
+// best (keeping it functional)
+const increasedByOne = numbers.map(num => num + 1);
+```
+
+- 暂时不要使用生成器
+
+> why?es5编译得不太好
+
+- 如果你必须使用生成器，确保函数签名空格方式正确。
+
+> why? function和都是相同概念级别的关键字的一部分。function是唯一的标识符，区别于function。
+
+```
+// bad
+function * foo() {
+  // ...
+}
+
+// bad
+const bar = function * () {
+  // ...
+};
+
+// bad
+const baz = function *() {
+  // ...
+};
+
+// bad
+const quux = function*() {
+  // ...
+};
+
+// bad
+function*foo() {
+  // ...
+}
+
+// bad
+function *foo() {
+  // ...
+}
+
+// very bad
+function
+*
+foo() {
+  // ...
+}
+
+// very bad
+const wat = function
+*
+() {
+  // ...
+};
+
+// good
+function* foo() {
+  // ...
+}
+
+// good
+const foo = function* () {
+  // ...
+};
+```
+
+### 属性Properties
+
+- 不要使用引号方式访问属性
+
+```
+const luke = {
+  jedi: true,
+  age: 28,
+};
+
+// bad
+const isJedi = luke['jedi'];
+
+// good
+const isJedi = luke.jedi;
+```
+
+- 通过变量访问对象属性时，使用[]
+
+```
+const luke = {
+  jedi: true,
+  age: 28,
+};
+
+function getProp(prop) {
+  return luke[prop];
+}
+
+const isJedi = getProp('jedi');
+```
+
+- 使用**操作符进行指数计算
+
+```
+// bad
+const binary = Math.pow(2, 10);
+
+// good
+const binary = 2 ** 10;
+```
+
+### 变量
+
+- 总是使用const或者let定义变量。避免污染全局命名空间。
+
+```
+// bad
+superPower = new SuperPower();
+
+// good
+const superPower = new SuperPower();
+```
+
+- 一个const或者let定义一个变量 
+
+> why? 更方便添加变量定义，方便debug
+
+```
+// bad
+const items = getItems(),
+    goSportsTeam = true,
+    dragonball = 'z';
+
+// bad
+// (compare to above, and try to spot the mistake)
+const items = getItems(),
+    goSportsTeam = true;
+    dragonball = 'z';
+
+// good
+const items = getItems();
+const goSportsTeam = true;
+const dragonball = 'z';
+```
+
+- const放在一起，let放在一起
+
+> why?更容易区分
+
+```
+// bad
+let i, len, dragonball,
+    items = getItems(),
+    goSportsTeam = true;
+
+// bad
+let i;
+const items = getItems();
+let dragonball;
+const goSportsTeam = true;
+let len;
+
+// good
+const goSportsTeam = true;
+const items = getItems();
+let dragonball;
+let i;
+let length;
+```
+- 需要时再定义变量，并且放在合理的地方
+
+> why?let和const属于块作用域
+
+```
+// bad - unnecessary function call
+function checkName(hasName) {
+  const name = getName();
+
+  if (hasName === 'test') {
+    return false;
+  }
+
+  if (name === 'test') {
+    this.setName('');
+    return false;
+  }
+
+  return name;
+}
+
+// good
+function checkName(hasName) {
+  if (hasName === 'test') {
+    return false;
+  }
+
+  const name = getName();
+
+  if (name === 'test') {
+    this.setName('');
+    return false;
+  }
+
+  return name;
+}
+```
+
+- 不要嵌套变量赋值
+
+> why?嵌套变量赋值隐式创建全局变量
+
+```
+// bad
+(function example() {
+  // JavaScript interprets this as
+  // let a = ( b = ( c = 1 ) );
+  // The let keyword only applies to variable a; variables b and c become
+  // global variables.
+  let a = b = c = 1;
+}());
+
+console.log(a); // throws ReferenceError
+console.log(b); // 1
+console.log(c); // 1
+
+// good
+(function example() {
+  let a = 1;
+  let b = a;
+  let c = a;
+}());
+
+console.log(a); // throws ReferenceError
+console.log(b); // throws ReferenceError
+console.log(c); // throws ReferenceError
+
+// the same applies for `const`
+```
+
+- 禁用一元操作符 ++ 和 --
+
+> why?因为一元操作符 ++ 和 -- 会自动添加分号，不同的空白可能会改变源代码的语义。
+
+```
+// bad
+
+const array = [1, 2, 3];
+let num = 1;
+num++;
+--num;
+
+let sum = 0;
+let truthyCount = 0;
+for (let i = 0; i < array.length; i++) {
+  let value = array[i];
+  sum += value;
+  if (value) {
+    truthyCount++;
+  }
+}
+
+// good
+
+const array = [1, 2, 3];
+let num = 1;
+num += 1;
+num -= 1;
+
+const sum = array.reduce((a, b) => a + b, 0);
+const truthyCount = array.filter(Boolean).length;
+```
+
+### 提升Hoisting
+
+- var声明变量会提升到作用域顶部，赋值操作不会提升。const和let没有类似的提升行为，因此要明白typeof操作不再安全。
+
+```
+// we know this wouldn’t work (assuming there
+// is no notDefined global variable)
+function example() {
+  console.log(notDefined); // => throws a ReferenceError
+}
+
+// creating a variable declaration after you
+// reference the variable will work due to
+// variable hoisting. Note: the assignment
+// value of `true` is not hoisted.
+function example() {
+  console.log(declaredButNotAssigned); // => undefined
+  var declaredButNotAssigned = true;
+}
+
+// the interpreter is hoisting the variable
+// declaration to the top of the scope,
+// which means our example could be rewritten as:
+function example() {
+  let declaredButNotAssigned;
+  console.log(declaredButNotAssigned); // => undefined
+  declaredButNotAssigned = true;
+}
+
+// using const and let
+function example() {
+  console.log(declaredButNotAssigned); // => throws a ReferenceError
+  console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+  const declaredButNotAssigned = true;
+}
+```
