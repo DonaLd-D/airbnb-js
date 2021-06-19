@@ -1,7 +1,6 @@
 <h1>Airbnb JavaScript代码规范（完整）</h1>
 
 ## 目录
-- [目录](#目录)
   - [**类型Types**](#类型types)
   - [**引用References**](#引用references)
   - [**对象Objects**](#对象objects)
@@ -14,7 +13,7 @@
   - [**模块Modules**](#模块modules)
   - [**迭代器与生成器 Iterators and Generators**](#迭代器与生成器-iterators-and-generators)
   - [**属性Properties**](#属性properties)
-  - [变量](#变量)
+  - [**变量**](#变量)
   - [**提升Hoisting**](#提升hoisting)
   - [**比较操作符和等于操作Comparison Operators & Equality**](#比较操作符和等于操作comparison-operators--equality)
   - [**块Blocks**](#块blocks)
@@ -1356,7 +1355,7 @@ const binary = 2 ** 10;
 ```
 
 [🏠返回顶部](#目录)
-### 变量
+### **变量**
 
 - 总是使用const或者let定义变量。避免污染全局命名空间。
 
