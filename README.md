@@ -1,7 +1,34 @@
-## Airbnb JavaScript代码规范（完整）
+<h2>Airbnb JavaScript代码规范（完整）</h2>
+
+- [类型Types](#类型types)
+- [引用References](#引用references)
+- [对象Objects](#对象objects)
+- [数组Arrays](#数组arrays)
+- [解构Destructuring](#解构destructuring)
+- [字符串Strings](#字符串strings)
+- [函数Functions](#函数functions)
+- [箭头函数Arrow Functions](#箭头函数arrow-functions)
+- [类和构造函数 Classes & Constructors](#类和构造函数-classes--constructors)
+- [模块Modules](#模块modules)
+- [迭代器与生成器 Iterators and Generators](#迭代器与生成器-iterators-and-generators)
+- [属性Properties](#属性properties)
+- [变量](#变量)
+- [提升Hoisting](#提升hoisting)
+- [比较操作符和等于操作Comparison Operators & Equality](#比较操作符和等于操作comparison-operators--equality)
+- [块Blocks](#块blocks)
+- [控制语句 Control Statements](#控制语句-control-statements)
+- [注释](#注释)
+- [空白Whitespace](#空白whitespace)
+- [分号 Semicolons](#分号-semicolons)
+- [类型转换和强制类型转换](#类型转换和强制类型转换)
+- [命名约定Naming Conventions](#命名约定naming-conventions)
+- [访问器Accessors](#访问器accessors)
+- [事件Events](#事件events)
+- [jQuery](#jquery)
 
 ### 类型Types
-#### 基本数据类型
+
+`基本数据类型`
 
 - string  
 - number
@@ -21,7 +48,7 @@ console.log(foo, bar); // => 1, 9
 
 - Symbols不能真正的被polyfilled，因此当目标浏览器或者环境本地不支持时，不应当使用Symbols.
 
-#### 复杂数据类型
+`复杂数据类型`
 
 - object
 - array
@@ -36,7 +63,7 @@ bar[0] = 9;
 console.log(foo[0], bar[0]); // => 9, 9
 ```
 
-#### 引用References
+### 引用References
 - 尽量使用const，避免使用var。
 ```
 // bad
@@ -78,7 +105,7 @@ console.log(a); // ReferenceError
 console.log(b); // ReferenceError
 ```
 
-#### 对象Objects
+### 对象Objects
 
 - 使用字面量方式创建对象。
 
@@ -235,7 +262,7 @@ const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
 const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
 ```
 
-#### 数组Arrays
+### 数组Arrays
 
 - 使用字面量定义数组 
 
@@ -376,7 +403,7 @@ const numberInArray = [
 ];
 ```
 
-#### 解构Destructuring
+### 解构Destructuring
 
 - 当访问对象的多个属性时，使用解构方式 
 
@@ -438,7 +465,7 @@ function processInput(input) {
 const { left, top } = processInput(input);
 ```
 
-#### 字符串Strings
+### 字符串Strings
 - 字符串使用单引号' '
 
 ```
@@ -511,7 +538,7 @@ const foo = '\'this\' is "quoted"';
 const foo = `my name is '${name}'`;
 ```
 
-#### 函数Functions
+### 函数Functions
 - ?使用命名函数表达式，而不是函数声明
 
 > 函数声明的方式存在提升，即：无论在哪里声明，效果等同于在函数顶部声明，只要在同一个作用域范围，就视为已经声明，哪怕在声明前就使用，也不会报错。
@@ -874,7 +901,7 @@ const itemHeight = (item) => {
 
 ```
 
-#### 类和构造函数 Classes & Constructors
+### 类和构造函数 Classes & Constructors
 
 - 使用class，避免直接操作prototype
 
