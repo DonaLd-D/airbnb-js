@@ -1,34 +1,34 @@
 <h2>Airbnb JavaScript代码规范（完整）</h2>
 
-- [类型Types](#类型types)
-- [引用References](#引用references)
-- [对象Objects](#对象objects)
-- [数组Arrays](#数组arrays)
-- [解构Destructuring](#解构destructuring)
-- [字符串Strings](#字符串strings)
-- [函数Functions](#函数functions)
-- [箭头函数Arrow Functions](#箭头函数arrow-functions)
-- [类和构造函数 Classes & Constructors](#类和构造函数-classes--constructors)
-- [模块Modules](#模块modules)
-- [迭代器与生成器 Iterators and Generators](#迭代器与生成器-iterators-and-generators)
-- [属性Properties](#属性properties)
+- [**类型Types**](#类型types)
+- [**引用References**](#引用references)
+- [**对象Objects**](#对象objects)
+- [**数组Arrays**](#数组arrays)
+- [**解构Destructuring**](#解构destructuring)
+- [**字符串Strings**](#字符串strings)
+- [**函数Functions**](#函数functions)
+- [**箭头函数Arrow Functions**](#箭头函数arrow-functions)
+- [**类和构造函数 Classes & Constructors**](#类和构造函数-classes--constructors)
+- [**模块Modules**](#模块modules)
+- [**迭代器与生成器 Iterators and Generators**](#迭代器与生成器-iterators-and-generators)
+- [**属性Properties**](#属性properties)
 - [变量](#变量)
-- [提升Hoisting](#提升hoisting)
-- [比较操作符和等于操作Comparison Operators & Equality](#比较操作符和等于操作comparison-operators--equality)
-- [块Blocks](#块blocks)
-- [控制语句 Control Statements](#控制语句-control-statements)
-- [注释](#注释)
-- [空白Whitespace](#空白whitespace)
-- [分号 Semicolons](#分号-semicolons)
-- [类型转换和强制类型转换](#类型转换和强制类型转换)
-- [命名约定Naming Conventions](#命名约定naming-conventions)
-- [访问器Accessors](#访问器accessors)
-- [事件Events](#事件events)
-- [jQuery](#jquery)
+- [**提升Hoisting**](#提升hoisting)
+- [**比较操作符和等于操作Comparison Operators & Equality**](#比较操作符和等于操作comparison-operators--equality)
+- [**块Blocks**](#块blocks)
+- [**控制语句 Control Statements**](#控制语句-control-statements)
+- [**注释**](#注释)
+- [**空白Whitespace**](#空白whitespace)
+- [**分号 Semicolons**](#分号-semicolons)
+- [**类型转换和强制类型转换**](#类型转换和强制类型转换)
+- [**命名约定Naming Conventions**](#命名约定naming-conventions)
+- [**访问器Accessors**](#访问器accessors)
+- [**事件Events**](#事件events)
+- [**jQuery**](#jquery)
 
-### 类型Types
+### **类型Types**
 
-`基本数据类型`
+**基本数据类型**
 
 - string  
 - number
@@ -48,7 +48,7 @@ console.log(foo, bar); // => 1, 9
 
 - Symbols不能真正的被polyfilled，因此当目标浏览器或者环境本地不支持时，不应当使用Symbols.
 
-`复杂数据类型`
+**复杂数据类型**
 
 - object
 - array
@@ -63,7 +63,7 @@ bar[0] = 9;
 console.log(foo[0], bar[0]); // => 9, 9
 ```
 
-### 引用References
+### **引用References**
 - 尽量使用const，避免使用var。
 ```
 // bad
@@ -105,7 +105,7 @@ console.log(a); // ReferenceError
 console.log(b); // ReferenceError
 ```
 
-### 对象Objects
+### **对象Objects**
 
 - 使用字面量方式创建对象。
 
@@ -262,7 +262,7 @@ const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
 const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
 ```
 
-### 数组Arrays
+### **数组Arrays**
 
 - 使用字面量定义数组 
 
@@ -403,7 +403,7 @@ const numberInArray = [
 ];
 ```
 
-### 解构Destructuring
+### **解构Destructuring**
 
 - 当访问对象的多个属性时，使用解构方式 
 
@@ -465,7 +465,7 @@ function processInput(input) {
 const { left, top } = processInput(input);
 ```
 
-### 字符串Strings
+### **字符串Strings**
 - 字符串使用单引号' '
 
 ```
@@ -538,7 +538,7 @@ const foo = '\'this\' is "quoted"';
 const foo = `my name is '${name}'`;
 ```
 
-### 函数Functions
+### **函数Functions**
 - ?使用命名函数表达式，而不是函数声明
 
 > 函数声明的方式存在提升，即：无论在哪里声明，效果等同于在函数顶部声明，只要在同一个作用域范围，就视为已经声明，哪怕在声明前就使用，也不会报错。
@@ -771,7 +771,7 @@ console.log(
 );
 ```
 
-### 箭头函数Arrow Functions
+### **箭头函数Arrow Functions**
 
 - 如果必须使用匿名函数，或者inline 回调函数，使用箭头函数。
 
@@ -901,7 +901,7 @@ const itemHeight = (item) => {
 
 ```
 
-### 类和构造函数 Classes & Constructors
+### **类和构造函数 Classes & Constructors**
 
 - 使用class，避免直接操作prototype
 
@@ -1058,7 +1058,7 @@ class Foo {
 }
 ```
 
-### 模块Modules
+### **模块Modules**
 - 使用modules（import/export)
 
 > why?modules是未来的趋势
@@ -1192,7 +1192,7 @@ import fooSass from 'foo.scss';
 import barCss from 'bar.css';
 ```
 
-### 迭代器与生成器 Iterators and Generators
+### **迭代器与生成器 Iterators and Generators**
 
 - 不要使用迭代器。更倾向于使用JavaScript的高阶函数代替循环（如for-in 或者for-of)
 
@@ -1300,7 +1300,7 @@ const foo = function* () {
 };
 ```
 
-### 属性Properties
+### **属性Properties**
 
 - 不要使用引号方式访问属性
 
@@ -1503,7 +1503,7 @@ const sum = array.reduce((a, b) => a + b, 0);
 const truthyCount = array.filter(Boolean).length;
 ```
 
-### 提升Hoisting
+### **提升Hoisting**
 
 - var声明变量会提升到作用域顶部，赋值操作不会提升。const和let没有类似的提升行为，因此要明白typeof操作不再安全。
 
@@ -1593,7 +1593,7 @@ function example() {
 }
 ```
 
-### 比较操作符和等于操作Comparison Operators & Equality
+### **比较操作符和等于操作Comparison Operators & Equality**
 
 - 使用===、!==
 - 条件语句比如if，判断表达式值时，会强制执行ToBoolean，遵循以下规则：  
@@ -1749,7 +1749,7 @@ if ((a || b) && c) {
 // good
 const bar = a + b / c * d;
 ```
-### 块Blocks
+### **块Blocks**
 
 - ?使用{}
 
@@ -1858,7 +1858,7 @@ function dogs(x) {
 }
 ```
 
-### 控制语句 Control Statements
+### **控制语句 Control Statements**
 
 - 对于控制语句中的条件表达式太长的情况，应当换行处理，把操作符放在每行的开头。
 
@@ -1911,7 +1911,7 @@ if (foo === 123 && bar === 'abc') {
 }
 ```
 
-### 注释
+### **注释**
 
 - 使用/** ... */多行注释
 
@@ -2042,7 +2042,7 @@ class Calculator extends Abacus {
 }
 ```
 
-### 空白Whitespace
+### **空白Whitespace**
 
 - 使用2个空格
 
@@ -2476,7 +2476,7 @@ createHero(
 );
 ```
 
-### 分号 Semicolons
+### **分号 Semicolons**
 
 ```
 // bad
@@ -2497,7 +2497,7 @@ createHero(
   return name;
 })());
 ```
-### 类型转换和强制类型转换
+### **类型转换和强制类型转换**
 
 - ？Perform type coercion at the beginning of the statement.
 - Strings:
@@ -2573,7 +2573,7 @@ const hasAge = Boolean(age);
 const hasAge = !!age;
 ```
 
-### 命名约定Naming Conventions
+### **命名约定Naming Conventions**
 
 - 不要使用一个字母命名
 
@@ -2755,7 +2755,7 @@ const requests = [
 ];
 ```
 
-### 访问器Accessors
+### **访问器Accessors**
 
 - 不需要属性的访问器函数
 - 不要使用getters/setters,会产生不可预期的副作用，而且难以维护和测试。
@@ -2816,7 +2816,7 @@ class Jedi {
 }
 ```
 
-### 事件Events
+### **事件Events**
 
 - 对于event的handler传递数据时，使用 { key:value... } 方式。这样，当需要传递更多信息时，不需要更改每个handler签名
 
@@ -2840,7 +2840,7 @@ $(this).on('listingUpdated', (e, data) => {
 });
 ```
 
-### jQuery
+### **jQuery**
 
 - jQuery对象变量使用 $ 区分
 
