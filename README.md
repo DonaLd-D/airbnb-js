@@ -2015,3 +2015,861 @@ class Calculator extends Abacus {
 }
 ```
 
+### 空白Whitespace
+
+- 使用2个空格
+
+```
+// bad
+function foo() {
+∙∙∙∙let name;
+}
+
+// bad
+function bar() {
+∙let name;
+}
+
+// good
+function baz() {
+∙∙let name;
+}
+```
+
+- 在 { 之前空格
+
+```
+// bad
+function test(){
+  console.log('test');
+}
+
+// good
+function test() {
+  console.log('test');
+}
+
+// bad
+dog.set('attr',{
+  age: '1 year',
+  breed: 'Bernese Mountain Dog',
+});
+
+// good
+dog.set('attr', {
+  age: '1 year',
+  breed: 'Bernese Mountain Dog',
+});
+```
+
+- 在条件判断语句的 ( 之前空格。
+
+```
+// bad
+if(isJedi) {
+  fight ();
+}
+
+// good
+if (isJedi) {
+  fight();
+}
+
+// bad
+function fight () {
+  console.log ('Swooosh!');
+}
+
+// good
+function fight() {
+  console.log('Swooosh!');
+}
+```
+- 要求操作符周围有空格
+
+```
+// bad
+const x=y+5;
+
+// good
+const x = y + 5;
+```
+- 文件结束时换一行
+
+```
+// bad
+import { es6 } from './AirbnbStyleGuide';
+  // ...
+export default es6;
+// bad
+import { es6 } from './AirbnbStyleGuide';
+  // ...
+export default es6;↵
+↵
+// good
+import { es6 } from './AirbnbStyleGuide';
+  // ...
+export default es6;↵
+```
+
+- 要求方法链中每个调用都有一个换行符
+
+```
+// bad
+$('#items').find('.selected').highlight().end().find('.open').updateCount();
+
+// bad
+$('#items').
+  find('.selected').
+    highlight().
+    end().
+  find('.open').
+    updateCount();
+
+// good
+$('#items')
+  .find('.selected')
+    .highlight()
+    .end()
+  .find('.open')
+    .updateCount();
+
+// bad
+const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
+    .attr('width', (radius + margin) * 2).append('svg:g')
+    .attr('transform', `translate(${radius + margin},${radius + margin})`)
+    .call(tron.led);
+
+// good
+const leds = stage.selectAll('.led')
+    .data(data)
+  .enter().append('svg:svg')
+    .classed('led', true)
+    .attr('width', (radius + margin) * 2)
+  .append('svg:g')
+    .attr('transform', `translate(${radius + margin},${radius + margin})`)
+    .call(tron.led);
+
+// good
+const leds = stage.selectAll('.led').data(data);
+```
+
+- 在每个代码块的结束位置和下一语句的开头空行
+
+```
+// bad
+if (foo) {
+  return bar;
+}
+return baz;
+
+// good
+if (foo) {
+  return bar;
+}
+
+return baz;
+
+// bad
+const obj = {
+  foo() {
+  },
+  bar() {
+  },
+};
+return obj;
+
+// good
+const obj = {
+  foo() {
+  },
+
+  bar() {
+  },
+};
+
+return obj;
+
+// bad
+const arr = [
+  function foo() {
+  },
+  function bar() {
+  },
+];
+return arr;
+
+// good
+const arr = [
+  function foo() {
+  },
+
+  function bar() {
+  },
+];
+
+return arr;
+```
+
+- 不要使用空行填充代码块 
+
+```
+// bad
+function bar() {
+
+  console.log(foo);
+
+}
+
+// bad
+if (baz) {
+
+  console.log(qux);
+} else {
+  console.log(foo);
+
+}
+
+// bad
+class Foo {
+
+  constructor(bar) {
+    this.bar = bar;
+  }
+}
+
+// good
+function bar() {
+  console.log(foo);
+}
+
+// good
+if (baz) {
+  console.log(qux);
+} else {
+  console.log(foo);
+}
+```
+
+- 禁止在 () 内有空格
+
+```
+// bad
+function bar( foo ) {
+  return foo;
+}
+
+// good
+function bar(foo) {
+  return foo;
+}
+
+// bad
+if ( foo ) {
+  console.log(foo);
+}
+
+// good
+if (foo) {
+  console.log(foo);
+}
+```
+- 禁止在 [] 内使用空格
+
+```
+// bad
+const foo = [ 1, 2, 3 ];
+console.log(foo[ 0 ]);
+
+// good
+const foo = [1, 2, 3];
+console.log(foo[0]);
+```
+- 在 {} 中使用空格
+
+```
+// bad
+const foo = {clark: 'kent'};
+
+// good
+const foo = { clark: 'kent' };
+```
+- 强制一行的最大长度100
+
+```
+// bad
+const foo = jsonData && jsonData.foo && jsonData.foo.bar && jsonData.foo.bar.baz && jsonData.foo.bar.baz.quux && jsonData.foo.bar.baz.quux.xyzzy;
+
+// bad
+$.ajax({ method: 'POST', url: 'https://airbnb.com/', data: { name: 'John' } }).done(() => console.log('Congratulations!')).fail(() => console.log('You have failed this city.'));
+
+// good
+const foo = jsonData
+  && jsonData.foo
+  && jsonData.foo.bar
+  && jsonData.foo.bar.baz
+  && jsonData.foo.bar.baz.quux
+  && jsonData.foo.bar.baz.quux.xyzzy;
+
+// good
+$.ajax({
+  method: 'POST',
+  url: 'https://airbnb.com/',
+  data: { name: 'John' },
+})
+  .done(() => console.log('Congratulations!'))
+  .fail(() => console.log('You have failed this city.'));
+```
+
+- 逗号风格：结束位置
+
+```
+// bad
+const story = [
+    once
+  , upon
+  , aTime
+];
+
+// good
+const story = [
+  once,
+  upon,
+  aTime,
+];
+
+// bad
+const hero = {
+    firstName: 'Ada'
+  , lastName: 'Lovelace'
+  , birthYear: 1815
+  , superPower: 'computers'
+};
+
+// good
+const hero = {
+  firstName: 'Ada',
+  lastName: 'Lovelace',
+  birthYear: 1815,
+  superPower: 'computers',
+};
+```
+
+- 末尾逗号
+
+> why?减少无意义的git diffs
+
+```
+// bad - git diff without trailing comma
+const hero = {
+     firstName: 'Florence',
+-    lastName: 'Nightingale'
++    lastName: 'Nightingale',
++    inventorOf: ['coxcomb chart', 'modern nursing']
+};
+
+// good - git diff with trailing comma
+const hero = {
+     firstName: 'Florence',
+     lastName: 'Nightingale',
++    inventorOf: ['coxcomb chart', 'modern nursing'],
+};
+```
+```
+// bad
+const hero = {
+  firstName: 'Dana',
+  lastName: 'Scully'
+};
+
+const heroes = [
+  'Batman',
+  'Superman'
+];
+
+// good
+const hero = {
+  firstName: 'Dana',
+  lastName: 'Scully',
+};
+
+const heroes = [
+  'Batman',
+  'Superman',
+];
+
+// bad
+function createHero(
+  firstName,
+  lastName,
+  inventorOf
+) {
+  // does nothing
+}
+
+// good
+function createHero(
+  firstName,
+  lastName,
+  inventorOf,
+) {
+  // does nothing
+}
+
+// good (note that a comma must not appear after a "rest" element)
+function createHero(
+  firstName,
+  lastName,
+  inventorOf,
+  ...heroArgs
+) {
+  // does nothing
+}
+
+// bad
+createHero(
+  firstName,
+  lastName,
+  inventorOf
+);
+
+// good
+createHero(
+  firstName,
+  lastName,
+  inventorOf,
+);
+
+// good (note that a comma must not appear after a "rest" element)
+createHero(
+  firstName,
+  lastName,
+  inventorOf,
+  ...heroArgs
+);
+```
+
+### 分号 Semicolons
+
+```
+// bad
+(function () {
+  const name = 'Skywalker'
+  return name
+})()
+
+// good
+(function () {
+  const name = 'Skywalker';
+  return name;
+}());
+
+// good, but legacy (guards against the function becoming an argument when two files with IIFEs are concatenated)
+;((() => {
+  const name = 'Skywalker';
+  return name;
+})());
+```
+### 类型转换和强制类型转换
+
+- ？Perform type coercion at the beginning of the statement.
+- Strings:
+
+```
+// => this.reviewScore = 9;
+
+// bad
+const totalScore = this.reviewScore + ''; // invokes this.reviewScore.valueOf()
+
+// bad
+const totalScore = this.reviewScore.toString(); // isn’t guaranteed to return a string
+
+// good
+const totalScore = String(this.reviewScore);
+```
+
+- Numbers:使用Number和parseInt 
+
+```
+const inputValue = '4';
+
+// bad
+const val = new Number(inputValue);
+
+// bad
+const val = +inputValue;
+
+// bad
+const val = inputValue >> 0;
+
+// bad
+const val = parseInt(inputValue);
+
+// good
+const val = Number(inputValue);
+
+// good
+const val = parseInt(inputValue, 10);
+```
+- 不管因为什么原因你必须使用位移操作，增加注释说明
+
+```
+// good
+/**
+ * parseInt was the reason my code was slow.
+ * Bitshifting the String to coerce it to a
+ * Number made it a lot faster.
+ */
+const val = inputValue >> 0;
+```
+
+- 小心位移操作。数值能表示64位数，但是位移操作只能返回32位整数。
+
+```
+2147483647 >> 0; // => 2147483647
+2147483648 >> 0; // => -2147483648
+2147483649 >> 0; // => -2147483647
+```
+
+- Boolean
+
+```
+const age = 0;
+
+// bad
+const hasAge = new Boolean(age);
+
+// good
+const hasAge = Boolean(age);
+
+// best
+const hasAge = !!age;
+```
+
+### 命名约定Naming Conventions
+
+- 不要使用一个字母命名
+
+```
+// bad
+function q() {
+  // ...
+}
+
+// good
+function query() {
+  // ...
+}
+```
+- 使用驼峰命名对象、函数和实例
+
+```
+// bad
+const OBJEcttsssss = {};
+const this_is_my_object = {};
+function c() {}
+
+// good
+const thisIsMyObject = {};
+function thisIsMyFunction() {}
+```
+
+- 使用PascalCase命名构造函数或者Class
+
+```
+// bad
+function user(options) {
+  this.name = options.name;
+}
+
+const bad = new user({
+  name: 'nope',
+});
+
+// good
+class User {
+  constructor(options) {
+    this.name = options.name;
+  }
+}
+
+const good = new User({
+  name: 'yup',
+});
+```
+
+- 不要使用 _ 开头或者结束
+
+> why?JavaScript没有私有属性或者私有方法的概念。使用下划线容易造成误解。
+
+```
+// bad
+this.__firstName__ = 'Panda';
+this.firstName_ = 'Panda';
+this._firstName = 'Panda';
+
+// good
+this.firstName = 'Panda';
+```
+
+- 不要保存this的引用。使用箭头函数或者 Function#bind
+
+```
+// bad
+function foo() {
+  const self = this;
+  return function () {
+    console.log(self);
+  };
+}
+
+// bad
+function foo() {
+  const that = this;
+  return function () {
+    console.log(that);
+  };
+}
+
+// good
+function foo() {
+  return () => {
+    console.log(this);
+  };
+}
+```
+
+- 文件名称与export default 相符
+
+```
+// file 1 contents
+class CheckBox {
+  // ...
+}
+export default CheckBox;
+
+// file 2 contents
+export default function fortyTwo() { return 42; }
+
+// file 3 contents
+export default function insideDirectory() {}
+
+// in some other file
+// bad
+import CheckBox from './checkBox'; // PascalCase import/export, camelCase filename
+import FortyTwo from './FortyTwo'; // PascalCase import/filename, camelCase export
+import InsideDirectory from './InsideDirectory'; // PascalCase import/filename, camelCase export
+
+// bad
+import CheckBox from './check_box'; // PascalCase import/export, snake_case filename
+import forty_two from './forty_two'; // snake_case import/filename, camelCase export
+import inside_directory from './inside_directory'; // snake_case import, camelCase export
+import index from './inside_directory/index'; // requiring the index file explicitly
+import insideDirectory from './insideDirectory/index'; // requiring the index file explicitly
+
+// good
+import CheckBox from './CheckBox'; // PascalCase export/import/filename
+import fortyTwo from './fortyTwo'; // camelCase export/import/filename
+import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
+// ^ supports both insideDirectory.js and insideDirectory/index.js
+```
+
+- 当export default一个函数时，使用驼峰命名。文件名也必须一致
+
+```
+function makeStyleGuide() {
+  // ...
+}
+
+export default makeStyleGuide;
+```
+
+- 当export constructor / class / singleton / function library / bare object，使用PascalCase命名方式
+
+```
+const AirbnbStyleGuide = {
+  es6: {
+  },
+};
+
+export default AirbnbStyleGuide;
+```
+
+- 缩略词必须首字母大写，或者全部小写
+
+```
+// bad
+import SmsContainer from './containers/SmsContainer';
+
+// bad
+const HttpRequests = [
+  // ...
+];
+
+// good
+import SMSContainer from './containers/SMSContainer';
+
+// good
+const HTTPRequests = [
+  // ...
+];
+
+// also good
+const httpRequests = [
+  // ...
+];
+
+// best
+import TextMessageContainer from './containers/TextMessageContainer';
+
+// best
+const requests = [
+  // ...
+];
+```
+
+### 访问器Accessors
+
+- 不需要属性的访问器函数
+- 不要使用getters/setters,会产生不可预期的副作用，而且难以维护和测试。
+
+```
+// bad
+class Dragon {
+  get age() {
+    // ...
+  }
+
+  set age(value) {
+    // ...
+  }
+}
+
+// good
+class Dragon {
+  getAge() {
+    // ...
+  }
+
+  setAge(value) {
+    // ...
+  }
+}
+```
+- 如果属性或者方法是boolean，使用 isVal() 或者 hasVal()
+
+```
+// bad
+if (!dragon.age()) {
+  return false;
+}
+
+// good
+if (!dragon.hasAge()) {
+  return false;
+}
+```
+
+- 创建 get() 和 set() 方法没有问题，但是保持一致性
+
+```
+class Jedi {
+  constructor(options = {}) {
+    const lightsaber = options.lightsaber || 'blue';
+    this.set('lightsaber', lightsaber);
+  }
+
+  set(key, val) {
+    this[key] = val;
+  }
+
+  get(key) {
+    return this[key];
+  }
+}
+```
+
+### 事件Events
+
+- 对于event的handler传递数据时，使用 { key:value... } 方式。这样，当需要传递更多信息时，不需要更改每个handler签名
+
+```
+// bad
+$(this).trigger('listingUpdated', listing.id);
+
+// ...
+
+$(this).on('listingUpdated', (e, listingId) => {
+  // do something with listingId
+});
+
+// good
+$(this).trigger('listingUpdated', { listingId: listing.id });
+
+// ...
+
+$(this).on('listingUpdated', (e, data) => {
+  // do something with data.listingId
+});
+```
+
+### jQuery
+
+- jQuery对象变量使用 $ 区分
+
+```
+// bad
+const sidebar = $('.sidebar');
+
+// good
+const $sidebar = $('.sidebar');
+
+// good
+const $sidebarBtn = $('.sidebar-btn');
+```
+- 缓存jQuery lookups
+
+```
+// bad
+function setSidebar() {
+  $('.sidebar').hide();
+
+  // ...
+
+  $('.sidebar').css({
+    'background-color': 'pink',
+  });
+}
+
+// good
+function setSidebar() {
+  const $sidebar = $('.sidebar');
+  $sidebar.hide();
+
+  // ...
+
+  $sidebar.css({
+    'background-color': 'pink',
+  });
+}
+```
+- Dom查找，使用级联 $('.sidebar ul') 或者父子 $('.sidebar > ul')
+- 指定范围进行find
+
+```
+// bad
+$('ul', '.sidebar').hide();
+
+// bad
+$('.sidebar').find('ul').hide();
+
+// good
+$('.sidebar ul').hide();
+
+// good
+$('.sidebar > ul').hide();
+
+// good
+$sidebar.find('ul').hide();
+```
+
