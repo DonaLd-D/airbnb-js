@@ -1,4 +1,4 @@
-<h1>Airbnb JavaScript代码规范（完整）</h1>
+<h1>Airbnb JavaScript代码规范</h1>
 
 ## 目录
   - [**类型Types**](#类型types)
