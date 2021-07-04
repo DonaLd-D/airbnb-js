@@ -38,7 +38,7 @@
 - undefined
 - symbol
   
-```
+```js
 const foo = 1;
 let bar = foo;
 
@@ -55,7 +55,7 @@ console.log(foo, bar); // => 1, 9
 - array
 - function
 
-```
+```js
 const foo = [1, 2];
 const bar = foo;
 
@@ -67,7 +67,7 @@ console.log(foo[0], bar[0]); // => 9, 9
 [⬆️ 🏠返回顶部](#目录)
 ### **引用References**
 - 尽量使用const，避免使用var。
-```
+```js
 // bad
 var a = 1;
 var b = 2;
@@ -81,7 +81,7 @@ const b = 2;
   
 > why? let属于块作用域，var是函数作用域
 
-```
+```js
 // bad
 var count = 1;
 if (true) {
@@ -97,7 +97,7 @@ if (true) {
 
 - 记住let和const都属于块作用域
 
-```
+```js
 // const and let only exist in the blocks they are defined in.
 {
   let a = 1;
@@ -112,7 +112,7 @@ console.log(b); // ReferenceError
 
 - 使用字面量方式创建对象。
 
-```
+```js
 / bad
 const item = new Object();
 
@@ -122,7 +122,7 @@ const item = {};
 - 在创建对象时，定义对象的所有属性
 > Why?这样对象所有的属性都在同一处定义
 
-```
+```js
 function getKey(k) {
   return `a key named ${k}`;
 }
@@ -144,7 +144,7 @@ const obj = {
 
 - 使用简写方式定义对象方法。
 
-```
+```js
 // bad
 const atom = {
   value: 1,
@@ -167,7 +167,7 @@ const atom = {
 - 使用简写方式定义对象属性。
 > why?书写更简洁
 
-```
+```js
 const lukeSkywalker = 'Luke Skywalker';
 
 // bad
@@ -184,7 +184,7 @@ const obj = {
 - 把简写的属性放在对象定义的开头
 > why?这样更容易判断哪些属性使用了简写
 
-```
+```js
 const anakinSkywalker = 'Anakin Skywalker';
 const lukeSkywalker = 'Luke Skywalker';
 
@@ -212,7 +212,7 @@ const obj = {
 - 只对不合法的标志符使用引号
 > why?通常这样代码更可读，同时语法高亮，且js引擎更容易优化。
 
-```
+```js
 // bad
 const bad = {
   'foo': 3,
@@ -231,7 +231,7 @@ const good = {
 - 不要直接调用Object.prototype，同理： hasOwnProperty, propertyIsEnumerable, isPrototypeOf
 > why?这些方法可能被吞没，比如用Object.create(null)方式创建的对象
 
-```
+```js
 // bad
 console.log(object.hasOwnProperty(key));
 
@@ -248,7 +248,7 @@ console.log(has.call(object, key));
 
 - 使用对象的spread操作符而不是Object.assign方法来浅拷贝对象。使用rest操作符获得一个去除某些属性新的对象。
 
-```
+```js
 // very bad
 const original = { a: 1, b: 2 };
 const copy = Object.assign(original, { c: 3 }); // this mutates `original` ಠ_ಠ
@@ -270,7 +270,7 @@ const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
 
 - 使用字面量定义数组 
 
-```
+```js
 // bad
 const items = new Array();
 
@@ -279,7 +279,7 @@ const items = [];
 ```
 - 使用Array#push方法添加元素
 
-```
+```js
 const someStack = [];
 
 // bad
@@ -290,7 +290,7 @@ someStack.push('abracadabra');
 ```
 - 使用...操作拷贝数组
 
-```
+```js
 // bad
 const len = items.length;
 const itemsCopy = [];
@@ -306,7 +306,7 @@ const itemsCopy = [...items];
 
 - 转换array-like对象为array时，使用...而不是Array.from
 
-```
+```js
 const foo = document.querySelectorAll('.foo');
 
 // good
@@ -317,7 +317,7 @@ const nodes = [...foo];
 ```
 - 对数组进行map时，使用Array.from替代...。因为前者的方式能避免创建中间数组
 
-```
+```js
 // bad
 const baz = [...foo].map(bar);
 
@@ -326,7 +326,7 @@ const baz = Array.from(foo, bar);
 ```
 - 在数组遍历处理的回调函数中，使用返回语句。当回调函数中函数体只有单条语句且不会产生副作用时，可以省略return。
 
-```
+```js
 // good
 [1, 2, 3].map((x) => {
   const y = x + 1;
@@ -373,7 +373,7 @@ inbox.filter((msg) => {
 ```
 - 当数组有多行时，在开始和结束符号均换行
 
-```
+```js
 // bad
 const arr = [
   [0, 1], [2, 3], [4, 5],
@@ -414,7 +414,7 @@ const numberInArray = [
 
 > why?解构可以减少临时变量的定义
 
-```
+```js
 // bad
 function getFullName(user) {
   const firstName = user.firstName;
@@ -436,7 +436,7 @@ function getFullName({ firstName, lastName }) {
 ```
 - 使用数组解构
 
-```
+```js
 const arr = [1, 2, 3, 4];
 
 // bad
@@ -450,7 +450,7 @@ const [first, second] = arr;
 
 > why?当添加字段或者顺序发生变化时，不依赖于位置
 
-```
+```js
 // bad
 function processInput(input) {
   // then a miracle occurs
@@ -474,7 +474,7 @@ const { left, top } = processInput(input);
 ### **字符串Strings**
 - 字符串使用单引号' '
 
-```
+```js
 // bad
 const name = "Capt. Janeway";
 
@@ -489,7 +489,7 @@ const name = 'Capt. Janeway';
 
 > 断开的字符串不易搜索，且不方便
 
-```
+```js
 // bad
 const errorMessage = 'This is a super long error that was thrown because \
 of Batman. When you stop to think about how Batman had anything to do \
@@ -509,7 +509,7 @@ const errorMessage = 'This is a super long error that was thrown because of Batm
 
 > why?模板字符串可读性更强，语法更简洁
 
-```
+```js
 // bad
 function sayHi(name) {
   return 'How are you, ' + name + '?';
@@ -535,7 +535,7 @@ function sayHi(name) {
 
 > why？影响可读性
 
-```
+```js
 // bad
 const foo = '\'this\' \i\s \"quoted\"';
 
@@ -550,7 +550,7 @@ const foo = `my name is '${name}'`;
 
 > 函数声明的方式存在提升，即：无论在哪里声明，效果等同于在函数顶部声明，只要在同一个作用域范围，就视为已经声明，哪怕在声明前就使用，也不会报错。
 如果使用函数声明方式定义函数，会影响可读性和可维护性。当函数足够大或者复杂时，对阅读其余代码造成困扰。
-```
+```js
 // bad
 function foo() {
   // ...
@@ -570,7 +570,7 @@ const short = function longUniqueMoreDescriptiveLexicalFoo() {
 
 - 要求 IIFE 使用括号括起来
 
-```
+```js
 // immediately-invoked function expression (IIFE)
 (function () {
   console.log('Welcome to the Internet. Please follow me.');
@@ -581,7 +581,7 @@ const short = function longUniqueMoreDescriptiveLexicalFoo() {
 - ？ Note: ECMA-262 defines a block
 as a list of statements. A function declaration is not a statement. 
 
-```
+```js
 // bad
 if (currentUser) {
   function test() {
@@ -600,7 +600,7 @@ if (currentUser) {
 
 - 不要命名参数为arguments。
 
-```
+```js
 // bad
 function foo(name, options, arguments) {
   // ...
@@ -613,7 +613,7 @@ function foo(name, options, args) {
 ```
 - 选择缺省参数的方式，避免修改参数
 
-```
+```js
 // really bad
 function handleThings(opts) {
   // No! We shouldn’t mutate function arguments.
@@ -638,7 +638,7 @@ function handleThings(opts = {}) {
 ```
 - 避免缺省参数带来的副作用
 
-```
+```js
 var b = 1;
 // bad
 function count(a = b++) {
@@ -651,7 +651,7 @@ count();  // 3
 ```
 - 将缺省参数放置最后
 
-```
+```js
 // bad
 function handleThings(opts = {}, name) {
   // ...
@@ -663,7 +663,7 @@ function handleThings(name, opts = {}) {
 }
 ```
 - 不要使用Function构造函数创建函数 
-```
+```js
 // bad
 var add = new Function('a', 'b', 'return a + b');
 
@@ -672,7 +672,7 @@ var subtract = Function('a', 'b', 'return a - b');
 ```
 - 函数签名留空格 space-before-function-paren space-before-blocks
 
-```
+```js
 // bad
 const f = function(){};
 const g = function (){};
@@ -687,7 +687,7 @@ const y = function a() {};
 
 > why?修改作为参数传入的对象，容易引发不预料的副作用
 
-```
+```js
 // bad
 function f1(obj) {
   obj.key = 1;
@@ -703,7 +703,7 @@ function f2(obj) {
 
 > why?对参数重新赋值会引发不可预料的行为，特别是访问arguments对象时。同时，会引发V8优化问题
 
-```
+```js
 // bad
 function f1(a) {
   a = 1;
@@ -729,7 +729,7 @@ function f4(a = 1) {
 
 > why?更简洁
 
-```
+```js
 // bad
 const x = [1, 2, 3, 4, 5];
 console.log.apply(console, x);
@@ -747,7 +747,7 @@ new Date(...[2016, 8, 5]);
 
 - 函数签名或者函数调用占多行时，每一个参数占一行，并且最后一个参数带逗号结束
 
-```
+```js
 
 // bad
 function foo(bar,
@@ -786,7 +786,7 @@ console.log(
 > why?语法更简洁，并且this更符合预期  
 如果函数逻辑相当复杂，应当使用命名函数
 
-```
+```js
 // bad
 [1, 2, 3].map(function (x) {
   const y = x + 1;
@@ -802,7 +802,7 @@ console.log(
 
 - 如果函数体只有一条语句，且该语句不会产生副作用。使用简写方式，隐式返回；或者使用完整写法，显式return。
 
-```
+```js
 // bad
 [1, 2, 3].map(number => {
   const nextNumber = number + 1;
@@ -846,7 +846,7 @@ foo(() => {
 
 > why?函数开头和结束更明确
 
-```
+```js
 // bad
 ['get', 'post', 'put'].map(httpMethod => Object.prototype.hasOwnProperty.call(
     httpMagicObjectWithAVeryLongName,
@@ -865,7 +865,7 @@ foo(() => {
 
 - 如果函数只有一个参数，省略括号，省略花括号。否则，一直使用完整写法，保持一致性。
 
-```
+```js
 // bad
 [1, 2, 3].map((x) => x * x);
 
@@ -892,7 +892,7 @@ foo(() => {
 
 - 使用无歧义的=>语法，与<=,>=区分开。
 
-```
+```js
 // bad
 const itemHeight = item => item.height > 256 ? item.largeSize : item.smallSize;
 
@@ -916,7 +916,7 @@ const itemHeight = (item) => {
 
 > why?class 语法更简洁，更易懂
 
-```
+```js
 // bad
 function Queue(contents = []) {
   this.queue = [...contents];
@@ -943,7 +943,7 @@ class Queue {
 
 > why?这是内置支持的继承原型方法，同时不影响instanceof结果
 
-```
+```js
 // bad
 const inherits = require('inherits');
 function PeekableQueue(contents) {
@@ -964,7 +964,7 @@ class PeekableQueue extends Queue {
 
 - 通过return this帮助链式方法调用
 
-```
+```js
 // bad
 Jedi.prototype.jump = function () {
   this.jumping = true;
@@ -1001,7 +1001,7 @@ luke.jump()
 
 - 自定义toString方法
 
-```
+```js
 class Jedi {
   constructor(options = {}) {
     this.name = options.name || 'no name';
@@ -1019,7 +1019,7 @@ class Jedi {
 
 - class有缺省构造函数，因此没必要定义空的构造函数。
 
-```
+```js
 // bad
 class Jedi {
   constructor() {}
@@ -1049,7 +1049,7 @@ class Rey extends Jedi {
 
 > why?后者会静默覆盖前者
 
-```
+```js
 // bad
 class Foo {
   bar() { return 1; }
