@@ -1073,7 +1073,7 @@ class Foo {
 
 > why?modules是未来的趋势
 
-```
+```js
 // bad
 const AirbnbStyleGuide = require('./AirbnbStyleGuide');
 module.exports = AirbnbStyleGuide.es6;
@@ -1089,7 +1089,7 @@ export default es6;
 
 - 不要使用*import
 
-```
+```js
 // bad
 import * as AirbnbStyleGuide from './AirbnbStyleGuide';
 
@@ -1100,7 +1100,7 @@ import AirbnbStyleGuide from './AirbnbStyleGuide';
 
 > why?尽管单行的方式更简洁，但是一行import一行export代码一致性更好
 
-```
+```js
 // bad
 // filename es6.js
 export { es6 as default } from './AirbnbStyleGuide';
@@ -1114,7 +1114,7 @@ export default es6;
 
 > why?维护性更好
 
-```
+```js
 // bad
 import foo from 'foo';
 // … some other imports … //
@@ -1132,7 +1132,7 @@ import foo, {
 
 - 不要export变值
 
-```
+```js
 // bad
 let foo = 3;
 export { foo };
@@ -1146,7 +1146,7 @@ export { foo };
 
 > why?可读性和可维护性更强
 
-```
+```js
 // bad
 export function foo() {}
 
@@ -1158,7 +1158,7 @@ export default function foo() {}
 
 > why?因为import行为会提升，因此保持它们放在最上面，防止产生令人奇怪的行为
 
-```
+```js
 // bad
 import foo from 'foo';
 foo.init();
@@ -1176,7 +1176,7 @@ foo.init();
 
 > why?缩进一致，尾行逗号结束
 
-```
+```js
 // bad
 import {longNameA, longNameB, longNameC, longNameD, longNameE} from 'path';
 
@@ -1192,7 +1192,7 @@ import {
 
 - 在import语句时不要使用webpack loader语法。
 
-```
+```js
 // bad
 import fooSass from 'css!sass!foo.scss';
 import barCss from 'style!css!bar.css';
@@ -1210,7 +1210,7 @@ import barCss from 'bar.css';
 > why?有利于函数式编程
 使用map() / every() / filter() / find() / findIndex() / reduce() / some() / ... 迭代数组, Object.keys() / Object.values() / Object.entries() 生成数组，这样做到可以迭代任何对象
 
-```
+```js
 const numbers = [1, 2, 3, 4, 5];
 
 // bad
@@ -1255,7 +1255,7 @@ const increasedByOne = numbers.map(num => num + 1);
 
 > why? function和都是相同概念级别的关键字的一部分。function是唯一的标识符，区别于function。
 
-```
+```js
 // bad
 function * foo() {
   // ...
@@ -1316,7 +1316,7 @@ const foo = function* () {
 
 - 不要使用引号方式访问属性
 
-```
+```js
 const luke = {
   jedi: true,
   age: 28,
@@ -1331,7 +1331,7 @@ const isJedi = luke.jedi;
 
 - 通过变量访问对象属性时，使用[]
 
-```
+```js
 const luke = {
   jedi: true,
   age: 28,
@@ -1346,7 +1346,7 @@ const isJedi = getProp('jedi');
 
 - 使用**操作符进行指数计算
 
-```
+```js
 // bad
 const binary = Math.pow(2, 10);
 
@@ -1359,7 +1359,7 @@ const binary = 2 ** 10;
 
 - 总是使用const或者let定义变量。避免污染全局命名空间。
 
-```
+```js
 // bad
 superPower = new SuperPower();
 
@@ -1371,7 +1371,7 @@ const superPower = new SuperPower();
 
 > why? 更方便添加变量定义，方便debug
 
-```
+```js
 // bad
 const items = getItems(),
     goSportsTeam = true,
@@ -1393,7 +1393,7 @@ const dragonball = 'z';
 
 > why?更容易区分
 
-```
+```js
 // bad
 let i, len, dragonball,
     items = getItems(),
@@ -1417,7 +1417,7 @@ let length;
 
 > why?let和const属于块作用域
 
-```
+```js
 // bad - unnecessary function call
 function checkName(hasName) {
   const name = getName();
@@ -1455,7 +1455,7 @@ function checkName(hasName) {
 
 > why?嵌套变量赋值隐式创建全局变量
 
-```
+```js
 // bad
 (function example() {
   // JavaScript interprets this as
@@ -1487,7 +1487,7 @@ console.log(c); // throws ReferenceError
 
 > why?因为一元操作符 ++ 和 -- 会自动添加分号，不同的空白可能会改变源代码的语义。
 
-```
+```js
 // bad
 
 const array = [1, 2, 3];
@@ -1521,7 +1521,7 @@ const truthyCount = array.filter(Boolean).length;
 
 - var声明变量会提升到作用域顶部，赋值操作不会提升。const和let没有类似的提升行为，因此要明白typeof操作不再安全。
 
-```
+```js
 // we know this wouldn’t work (assuming there
 // is no notDefined global variable)
 function example() {
@@ -1555,7 +1555,7 @@ function example() {
 ```
 - 匿名函数表达式会提升变量，但是不会提升函数赋值
 
-```
+```js
 function example() {
   console.log(anonymous); // => undefined
 
@@ -1597,7 +1597,7 @@ function example() {
 
 - 函数定义提升函数名称和函数体
 
-```
+```js
 function example() {
   superPower(); // => Flying
 
@@ -1619,7 +1619,7 @@ function example() {
 5. `Number`：+0,-0,NaN为false,其余为true
 6. `String`：‘’空字符串为false，其余为true
 
-```
+```js
 if ([0] && []) {
   // true
   // an array (even an empty one) is an object, objects will evaluate to true
@@ -1628,7 +1628,7 @@ if ([0] && []) {
 
 - 使用简写方式判断，但是对strings和numbers比较使用显式判断
 
-```
+```js
 // bad
 if (isValid === true) {
   // ...
@@ -1661,7 +1661,7 @@ if (collection.length > 0) {
 ```
 - 使用{}在case、default子句中定义变量、函数和类 
 
-```
+```js
 // bad
 switch (foo) {
   case 1:
@@ -1706,7 +1706,7 @@ switch (foo) {
 
 - 三元操作放在一行
 
-```
+```js
 // bad
 const foo = maybe1 > maybe2
   ? "bar"
@@ -1725,7 +1725,7 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
 ```
 - 避免不必要的三元操作
 
-```
+```js
 // bad
 const foo = a ? a : b;
 const bar = c ? true : false;
@@ -1738,7 +1738,7 @@ const baz = !c;
 ```
 - 禁止混合使用不同的操作符
 
-```
+```js
 // bad
 const foo = a && b < 0 || c > 0 || d + 1 === 0;
 
@@ -1770,7 +1770,7 @@ const bar = a + b / c * d;
 
 - ?使用{}
 
-```
+```js
 // bad
 if (test)
   return false;
@@ -1794,7 +1794,7 @@ function bar() {
 
 - 把else与if的结束放在一行
 
-```
+```js
 // bad
 if (test) {
   thing1();
@@ -1814,7 +1814,7 @@ if (test) {
 ```
 - 禁止 if 语句中 return 语句之后有 else 块 
 
-```
+```js
 // bad
 function foo() {
   if (x) {
@@ -1880,7 +1880,7 @@ function dogs(x) {
 
 - 对于控制语句中的条件表达式太长的情况，应当换行处理，把操作符放在每行的开头。
 
-```
+```js
 // bad
 if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
   thing1();
@@ -1934,7 +1934,7 @@ if (foo === 123 && bar === 'abc') {
 
 - 使用/** ... */多行注释
 
-```
+```js
 // bad
 // make() returns a new element
 // based on the passed in tag name
@@ -1963,7 +1963,7 @@ function make(tag) {
 
 - 单行注释使用//。//放在代码的上面一行，同时，如果不是区块的开头，注释上方空行处理。
 
-```
+```js
 // bad
 const active = true;  // is current tab
 
@@ -2001,7 +2001,7 @@ function getType() {
 
 - 所有注释空格开头，增强易读性
 
-```
+```js
 // bad
 //is current tab
 const active = true;
@@ -2038,7 +2038,7 @@ function make(tag) {
 - 使用FIXME或者TODO帮助开发者明白问题。
 - 使用 // FIXME 注释问题
 
-```
+```js
 class Calculator extends Abacus {
   constructor() {
     super();
@@ -2050,7 +2050,7 @@ class Calculator extends Abacus {
 ```
 - 使用 // TODO 注释问题的解决方案
 
-```
+```js
 class Calculator extends Abacus {
   constructor() {
     super();
@@ -2066,7 +2066,7 @@ class Calculator extends Abacus {
 
 - 使用2个空格
 
-```
+```js
 // bad
 function foo() {
 ∙∙∙∙let name;
@@ -2085,7 +2085,7 @@ function baz() {
 
 - 在 { 之前空格
 
-```
+```js
 // bad
 function test(){
   console.log('test');
@@ -2111,7 +2111,7 @@ dog.set('attr', {
 
 - 在条件判断语句的 ( 之前空格。
 
-```
+```js
 // bad
 if(isJedi) {
   fight ();
@@ -2143,7 +2143,7 @@ const x = y + 5;
 ```
 - 文件结束时换一行
 
-```
+```js
 // bad
 import { es6 } from './AirbnbStyleGuide';
   // ...
@@ -2161,7 +2161,7 @@ export default es6;↵
 
 - 要求方法链中每个调用都有一个换行符
 
-```
+```js
 // bad
 $('#items').find('.selected').highlight().end().find('.open').updateCount();
 
@@ -2203,7 +2203,7 @@ const leds = stage.selectAll('.led').data(data);
 
 - 在每个代码块的结束位置和下一语句的开头空行
 
-```
+```js
 // bad
 if (foo) {
   return bar;
@@ -2260,7 +2260,7 @@ return arr;
 
 - 不要使用空行填充代码块 
 
-```
+```js
 // bad
 function bar() {
 
@@ -2300,7 +2300,7 @@ if (baz) {
 
 - 禁止在 () 内有空格
 
-```
+```js
 // bad
 function bar( foo ) {
   return foo;
@@ -2323,7 +2323,7 @@ if (foo) {
 ```
 - 禁止在 [] 内使用空格
 
-```
+```js
 // bad
 const foo = [ 1, 2, 3 ];
 console.log(foo[ 0 ]);
@@ -2334,7 +2334,7 @@ console.log(foo[0]);
 ```
 - 在 {} 中使用空格
 
-```
+```js
 // bad
 const foo = {clark: 'kent'};
 
@@ -2343,7 +2343,7 @@ const foo = { clark: 'kent' };
 ```
 - 强制一行的最大长度100
 
-```
+```js
 // bad
 const foo = jsonData && jsonData.foo && jsonData.foo.bar && jsonData.foo.bar.baz && jsonData.foo.bar.baz.quux && jsonData.foo.bar.baz.quux.xyzzy;
 
@@ -2370,7 +2370,7 @@ $.ajax({
 
 - 逗号风格：结束位置
 
-```
+```js
 // bad
 const story = [
     once
@@ -2406,7 +2406,7 @@ const hero = {
 
 > why?减少无意义的git diffs
 
-```
+```js
 // bad - git diff without trailing comma
 const hero = {
      firstName: 'Florence',
@@ -2422,7 +2422,7 @@ const hero = {
 +    inventorOf: ['coxcomb chart', 'modern nursing'],
 };
 ```
-```
+```js
 // bad
 const hero = {
   firstName: 'Dana',
@@ -2499,7 +2499,7 @@ createHero(
 [⬆️ 🏠返回顶部](#目录)
 ### **分号 Semicolons**
 
-```
+```js
 // bad
 (function () {
   const name = 'Skywalker'
@@ -2525,7 +2525,7 @@ createHero(
 - ？Perform type coercion at the beginning of the statement.
 - Strings:
 
-```
+```js
 // => this.reviewScore = 9;
 
 // bad
@@ -2540,7 +2540,7 @@ const totalScore = String(this.reviewScore);
 
 - Numbers:使用Number和parseInt 
 
-```
+```js
 const inputValue = '4';
 
 // bad
@@ -2563,7 +2563,7 @@ const val = parseInt(inputValue, 10);
 ```
 - 不管因为什么原因你必须使用位移操作，增加注释说明
 
-```
+```js
 // good
 /**
  * parseInt was the reason my code was slow.
@@ -2575,7 +2575,7 @@ const val = inputValue >> 0;
 
 - 小心位移操作。数值能表示64位数，但是位移操作只能返回32位整数。
 
-```
+```js
 2147483647 >> 0; // => 2147483647
 2147483648 >> 0; // => -2147483648
 2147483649 >> 0; // => -2147483647
@@ -2583,7 +2583,7 @@ const val = inputValue >> 0;
 
 - Boolean
 
-```
+```js
 const age = 0;
 
 // bad
@@ -2601,7 +2601,7 @@ const hasAge = !!age;
 
 - 不要使用一个字母命名
 
-```
+```js
 // bad
 function q() {
   // ...
@@ -2614,7 +2614,7 @@ function query() {
 ```
 - 使用驼峰命名对象、函数和实例
 
-```
+```js
 // bad
 const OBJEcttsssss = {};
 const this_is_my_object = {};
@@ -2627,7 +2627,7 @@ function thisIsMyFunction() {}
 
 - 使用PascalCase命名构造函数或者Class
 
-```
+```js
 // bad
 function user(options) {
   this.name = options.name;
@@ -2653,7 +2653,7 @@ const good = new User({
 
 > why?JavaScript没有私有属性或者私有方法的概念。使用下划线容易造成误解。
 
-```
+```js
 // bad
 this.__firstName__ = 'Panda';
 this.firstName_ = 'Panda';
@@ -2665,7 +2665,7 @@ this.firstName = 'Panda';
 
 - 不要保存this的引用。使用箭头函数或者 Function#bind
 
-```
+```js
 // bad
 function foo() {
   const self = this;
@@ -2692,7 +2692,7 @@ function foo() {
 
 - 文件名称与export default 相符
 
-```
+```js
 // file 1 contents
 class CheckBox {
   // ...
@@ -2727,7 +2727,7 @@ import insideDirectory from './insideDirectory'; // camelCase export/import/dire
 
 - 当export default一个函数时，使用驼峰命名。文件名也必须一致
 
-```
+```js
 function makeStyleGuide() {
   // ...
 }
@@ -2737,7 +2737,7 @@ export default makeStyleGuide;
 
 - 当export constructor / class / singleton / function library / bare object，使用PascalCase命名方式
 
-```
+```js
 const AirbnbStyleGuide = {
   es6: {
   },
@@ -2748,7 +2748,7 @@ export default AirbnbStyleGuide;
 
 - 缩略词必须首字母大写，或者全部小写
 
-```
+```js
 // bad
 import SmsContainer from './containers/SmsContainer';
 
@@ -2785,7 +2785,7 @@ const requests = [
 - 不需要属性的访问器函数
 - 不要使用getters/setters,会产生不可预期的副作用，而且难以维护和测试。
 
-```
+```js
 // bad
 class Dragon {
   get age() {
@@ -2810,7 +2810,7 @@ class Dragon {
 ```
 - 如果属性或者方法是boolean，使用 isVal() 或者 hasVal()
 
-```
+```js
 // bad
 if (!dragon.age()) {
   return false;
@@ -2824,7 +2824,7 @@ if (!dragon.hasAge()) {
 
 - 创建 get() 和 set() 方法没有问题，但是保持一致性
 
-```
+```js
 class Jedi {
   constructor(options = {}) {
     const lightsaber = options.lightsaber || 'blue';
@@ -2846,7 +2846,7 @@ class Jedi {
 
 - 对于event的handler传递数据时，使用 { key:value... } 方式。这样，当需要传递更多信息时，不需要更改每个handler签名
 
-```
+```js
 // bad
 $(this).trigger('listingUpdated', listing.id);
 
@@ -2871,7 +2871,7 @@ $(this).on('listingUpdated', (e, data) => {
 
 - jQuery对象变量使用 $ 区分
 
-```
+```js
 // bad
 const sidebar = $('.sidebar');
 
@@ -2883,7 +2883,7 @@ const $sidebarBtn = $('.sidebar-btn');
 ```
 - 缓存jQuery lookups
 
-```
+```js
 // bad
 function setSidebar() {
   $('.sidebar').hide();
@@ -2910,7 +2910,7 @@ function setSidebar() {
 - Dom查找，使用级联 $('.sidebar ul') 或者父子 $('.sidebar > ul')
 - 指定范围进行find
 
-```
+```js
 // bad
 $('ul', '.sidebar').hide();
 
