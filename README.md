@@ -1569,7 +1569,7 @@ function example() {
 
 - 命名函数表达式会提升变量，但是不是函数名或者函数体
 
-```
+```js
 function example() {
   console.log(named); // => undefined
 
